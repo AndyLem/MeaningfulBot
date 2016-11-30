@@ -31,7 +31,7 @@ public class EchoDialog : IDialog<object>
     public virtual async Task MeaningfulMessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
     {
         var message = await argument;
-        var rnd = Random.Next(100);
+        var rnd = 5;
         if (message.Text.EndsWith("?"))
         {
             if (rnd > 5)
