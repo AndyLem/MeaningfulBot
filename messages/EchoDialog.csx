@@ -31,20 +31,23 @@ public class EchoDialog : IDialog<object>
     public virtual async Task MeaningfulMessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
     {
         var message = await argument;
-        var rnd = 5;
+        var rnd = DateTime.Now.Milliseconds.ToString();
+        var doSwitch = rnd.EndsWith("0");
         if (message.Text.EndsWith("?"))
         {
-            if (rnd > 5)
-                await context.PostAsync($"Не понял");
+            if (doSwitch)
+                await context.PostAsync($"В смысле {message.Text}");
             else
-                await context.PostAsync($"В смысле {message.Text}?");
+                await context.PostAsync($"Не понял");
+            
         }
         else
         {
-            if (rnd > 5)
-                await context.PostAsync($"В смысле {message.Text}?");
-            else
+            if (doSwitch)
                 await context.PostAsync($"Не понял");
+            else
+                await context.PostAsync($"В смысле {message.Text}?");
+            
                 
         }
         context.Wait(MeaningfulMessageReceivedAsync);
