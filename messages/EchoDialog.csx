@@ -31,7 +31,7 @@ public class EchoDialog : IDialog<object>
     public virtual async Task MeaningfulMessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
     {
         var message = await argument;
-        var rnd = DateTime.Now.Milliseconds.ToString();
+        var rnd = DateTime.Now.Millisecond.ToString();
         var doSwitch = rnd.EndsWith("0");
         if (message.Text.EndsWith("?"))
         {
